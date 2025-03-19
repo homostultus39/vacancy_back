@@ -1,5 +1,5 @@
 from rest_framework.permissions import BasePermission
-from .utils import is_blacklisted, is_whitelisted
+from .utils import is_blacklisted
 
 
 class IsTokenValid(BasePermission):

@@ -1,12 +1,26 @@
 services:
-  web:
-    build: .
+  backend:
+    build:
+      context: ../djcore
+      dockerfile: Dockerfile
+    container_name: backend
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+    environment:
+      - REDIS_URL=redis://redis:6379/1
+    networks:
+      - app-network
 
   redis:
     image: "redis:alpine"
     container_name: 'redis'
     ports:
       - "6379:6379"
-#    command: ["redis-server", "--requirepass", "jwttemp"]
-#    environment:
-#      - REDIS_PASSWORD=jwttemp
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
