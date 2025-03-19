@@ -1,4 +1,4 @@
-const API_URL = "http://127.0.0.1:8000/api";  // URL Django API
+const API_URL = "http://127.0.0.1:8000/api";  // URL вашего Django API
 
 async function login() {
     const username = document.getElementById("username").value;
@@ -17,7 +17,6 @@ async function login() {
         localStorage.setItem("refresh_token", data.refresh);
 
         const userInfo = await fetchUserInfo(data.access);
-
         if (userInfo) {
             redirectToRolePage(userInfo);
         }
@@ -41,13 +40,15 @@ async function fetchUserInfo(token) {
 }
 
 function redirectToRolePage(userInfo) {
+    // Перенаправление в зависимости от роли
     if (userInfo.is_staff) {
-        window.location.href = "/admin-panel/";
+        window.location.href = "/admin-content/";
     } else {
         window.location.href = "/user-content/";
     }
 }
 
+// Функции для загрузки контента остаются как есть, используя access_token в заголовке
 async function getCommonContent() {
     let token = localStorage.getItem("access_token");
 
@@ -63,7 +64,7 @@ async function getCommonContent() {
     }
 
     const data = await response.json();
-    document.getElementById("common-content").innerText = JSON.stringify(data);
+    document.getElementById("common-content").innerText = JSON.stringify(data, null, 2);
 }
 
 async function getRoleSpecificContent() {
@@ -81,7 +82,7 @@ async function getRoleSpecificContent() {
     }
 
     const data = await response.json();
-    document.getElementById("role-content").innerText = JSON.stringify(data);
+    document.getElementById("role-content").innerText = JSON.stringify(data, null, 2);
 }
 
 async function refreshAccessToken() {

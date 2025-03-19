@@ -17,14 +17,12 @@ Including another URLconf
 from django.urls import path
 
 from jwtauth import views
-from jwtauth.views import UserInfoAPIView, LogoutAPIView, RoleSpecificContentView, CommonContentView
+from jwtauth.views import UserInfoAPIView, LogoutAPIView, CommonContentView, RoleSpecificContentView
 
 urlpatterns = [
-    #django views
     path('', views.index, name='home'),
     path('user-content/', views.user_content, name="user_content"),
-    path('admin-panel/', views.admin_panel, name="admin_panel"),
-    #drf API
+    path('admin-content/', views.admin_content, name="admin_content"),
     path('api/me/', UserInfoAPIView.as_view(), name="user_info"),
     path('api/common-content/', CommonContentView.as_view(), name="common_content"),
     path('api/role-content/', RoleSpecificContentView.as_view(), name="role_content"),

@@ -1,28 +1,24 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JWT Аутентификация</title>
-    <link rel="stylesheet" href="./static/frontend/styles.css">
+  <meta charset="UTF-8">
+  <title>Авторизация</title>
+  <link rel="stylesheet" href="{% static 'frontend/../../static/styles.css' %}">
+  <script src="{% static 'frontend/../../static/script.js' %}" defer></script>
 </head>
 <body>
-    <h1>JWT Аутентификация</h1>
+  <h1>Добро пожаловать! Войдите в систему</h1>
+  <div id="login-container">
+    <label for="username"></label>
+    <input type="text" id="username" placeholder="Введите логин" required>
+    <label for="password"></label>
+    <input type="password" id="password" placeholder="Введите пароль" required>
 
-    <div id="login-container">
-        <h2>Вход</h2>
-        <input type="text" id="username" placeholder="Логин">
-        <input type="password" id="password" placeholder="Пароль">
-        <button onclick="login()">Войти</button>
-    </div>
-
-    <div id="content-container" style="display: none;">
-        <h2>Приватный контент</h2>
-        <button onclick="getProtectedData()">Получить данные</button>
-        <p id="protected-data"></p>
-        <button onclick="logout()">Выход</button>
-    </div>
-
-    <script src="./static/frontend/script.js"></script>
+    <button onclick="login()">Войти</button>
+  </div>
+  <div id="loading-message" style="display:none;">
+    <p>Авторизация...</p>
+  </div>
 </body>
 </html>
